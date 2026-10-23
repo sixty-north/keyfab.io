@@ -1,0 +1,1308 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Font licences — keyfab</title>
+  <script>
+    // The colour theme a viewer chose, Light or Dark, applied before the first paint so the page never flashes
+    // the other one. Following the system is the default and stores nothing. A per-viewer convenience: the
+    // choice alone, no identifier, no cookie; storage that is unavailable or blocked leaves the system in charge.
+    (function () {
+      try {
+        var chosen = localStorage.getItem('keyfab-theme');
+        if (chosen === 'light' || chosen === 'dark') document.documentElement.setAttribute('data-theme', chosen);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="preload" href="/static/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/static/brand/tokens.css">
+  <link rel="stylesheet" href="/static/brand/site.css">
+  <link rel="stylesheet" href="/static/brand/workspace.css">
+  
+</head>
+<body>
+
+<a class="skip-link" href="#main" data-testid="skip-link">Skip to content</a>
+<header class="site-bar" data-testid="site-header">
+  <a class="site-bar-brand" href="/" aria-label="keyfab home" data-testid="site-wordmark"><svg aria-hidden="true" class="kf-wordmark" viewBox="0 0.0 618.4 131.0" role="img" aria-label="keyfab" xmlns="http://www.w3.org/2000/svg"><path class="kf-wordmark-bar" fill="var(--signal-graphic, #07883d)" d="M339.40 121.00H385.10A5 5 0 0 1 390.10 126.00V126.00A5 5 0 0 1 385.10 131.00H339.40A5 5 0 0 1 334.40 126.00V126.00A5 5 0 0 1 339.40 121.00Z"/><path class="kf-wordmark-letters" fill="currentColor" d="M1.50 0.00H18.00A1.5 1.5 0 0 1 19.50 1.50V98.50A1.5 1.5 0 0 1 18.00 100.00H1.50A1.5 1.5 0 0 1 0.00 98.50V1.50A1.5 1.5 0 0 1 1.50 0.00ZM59.87 25.00L89.00 25.00L18.50 85.00L18.50 60.21ZM21.85 57.36L36.45 44.93L90.00 100.00L63.31 100.00ZM122.50 25.00H185.20A15 15 0 0 1 200.20 40.00V72.14L200.20 72.14H107.50L107.50 72.14V40.00A15 15 0 0 1 122.50 25.00ZM131.00 41.00A4 4 0 0 0 127.00 45.00V56.54L127.00 56.54H180.70L180.70 56.54V45.00A4 4 0 0 0 176.70 41.00ZM107.50 71.14H127.00L127.00 71.14V100.00L127.00 100.00H117.25A9.75 9.75 0 0 1 107.50 90.25V71.14L107.50 71.14ZM107.50 84.40H200.20L200.20 84.40V98.00A2 2 0 0 1 198.20 100.00H115.30A7.8 7.8 0 0 1 107.50 92.20V84.40L107.50 84.40ZM127.00 84.40L127.00 80.40A4 4 0 0 0 131.00 84.40ZM216.10 25.00L235.70 25.00L276.10 96.00L260.10 106.00ZM294.60 25.00L314.60 25.00L272.60 117.00Q268.10 131.00 256.10 131.00H221.50V115.00H250.10Q252.60 115.00 253.60 112.50ZM353.95 0.00H363.70L363.70 0.00V98.50A1.5 1.5 0 0 1 362.20 100.00H345.70A1.5 1.5 0 0 1 344.20 98.50V9.75A9.75 9.75 0 0 1 353.95 0.00ZM352.20 0.00H394.60A1.5 1.5 0 0 1 396.10 1.50V14.50A1.5 1.5 0 0 1 394.60 16.00H344.20L344.20 16.00V8.00A8 8 0 0 1 352.20 0.00ZM363.70 16.00L367.70 16.00A4 4 0 0 0 363.70 20.00ZM329.90 25.00H394.60A1.5 1.5 0 0 1 396.10 26.50V39.50A1.5 1.5 0 0 1 394.60 41.00H329.90A1.5 1.5 0 0 1 328.40 39.50V26.50A1.5 1.5 0 0 1 329.90 25.00ZM416.30 25.00H492.40A8 8 0 0 1 500.40 33.00V41.00L500.40 41.00H416.30A1.5 1.5 0 0 1 414.80 39.50V26.50A1.5 1.5 0 0 1 416.30 25.00ZM490.65 25.00H490.65A9.75 9.75 0 0 1 500.40 34.75V98.50A1.5 1.5 0 0 1 498.90 100.00H482.40A1.5 1.5 0 0 1 480.90 98.50V34.75A9.75 9.75 0 0 1 490.65 25.00ZM480.90 41.00L480.90 45.00A4 4 0 0 0 476.90 41.00ZM422.80 55.39H493.50L493.50 55.39V77.70A22.3029 22.3029 0 0 1 471.20 100.00H422.80A12 12 0 0 1 410.80 88.00V67.39A12 12 0 0 1 422.80 55.39ZM434.30 71.39A4 4 0 0 0 430.30 75.39V80.00A4 4 0 0 0 434.30 84.00H476.90A4 4 0 0 0 480.90 80.00V71.39L480.90 71.39ZM525.30 0.00H541.80A1.5 1.5 0 0 1 543.30 1.50V98.50A1.5 1.5 0 0 1 541.80 100.00H525.30A1.5 1.5 0 0 1 523.80 98.50V1.50A1.5 1.5 0 0 1 525.30 0.00ZM557.60 25.00H603.40A15 15 0 0 1 618.40 40.00V85.00A15 15 0 0 1 603.40 100.00H559.30A28.6 28.6 0 0 1 530.70 71.40V51.90A26.9 26.9 0 0 1 557.60 25.00ZM547.30 41.00A4 4 0 0 0 543.30 45.00V80.00A4 4 0 0 0 547.30 84.00H594.90A4 4 0 0 0 598.90 80.00V45.00A4 4 0 0 0 594.90 41.00Z"/></svg></a>
+  
+  <span class="site-bar-spacer"></span>
+  
+  
+<button type="button" class="theme-cycle" data-theme-cycle data-current="system" data-testid="theme-cycle"
+        aria-label="Theme: follow system — switch to light" title="Theme: follow system — switch to light" hidden>
+  <span class="theme-cycle-icon" data-icon="light" hidden><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.5v1.75M8 12.75v1.75M1.5 8h1.75M12.75 8h1.75M3.4 3.4l1.24 1.24M11.36 11.36l1.24 1.24M3.4 12.6l1.24-1.24M11.36 4.64l1.24-1.24"/></svg></span>
+  <span class="theme-cycle-icon" data-icon="dark" hidden><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z"/></svg></span>
+  <span class="theme-cycle-icon" data-icon="system"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor" stroke="none"/></svg></span>
+</button>
+
+  
+</header>
+
+<main class="site-main" id="main">
+
+<div class="page-head">
+  <h1 data-testid="legal-title">Font licences</h1>
+  
+</div>
+<article class="legal-text" data-testid="legal-page" data-slug="font-licences">
+
+<div data-testid="font-licences">
+<p>The fonts keyfab provides for keycap legends, and the licence each is distributed under, in full.</p>
+
+<section data-testid="font-licences-licence">
+  <h2 class="eyebrow">Fira Sans</h2>
+  <ul>
+    
+    <li data-testid="font-licences-face" data-resource-id="fira-sans"><b>Fira Sans</b> Regular. Digitized data copyright 2012-2016, The Mozilla Foundation and Telefonica S.A.</li>
+    
+  </ul>
+  <details>
+    <summary>SIL Open Font License, Version 1.1</summary>
+    <pre data-testid="font-licences-text">Digitized data copyright 2012-2016, The Mozilla Foundation and Telefonica S.A.
+
+Fira Sans Regular, Version 4.203 (http://www.carrois.com).
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&#34;Font Software&#34; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&#34;Reserved Font Name&#34; refers to any names specified as such after the
+copyright statement(s).
+
+&#34;Original Version&#34; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&#34;Modified Version&#34; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&#34;Author&#34; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+</pre>
+  </details>
+</section>
+
+<section data-testid="font-licences-licence">
+  <h2 class="eyebrow">IBM Plex Sans</h2>
+  <ul>
+    
+    <li data-testid="font-licences-face" data-resource-id="ibm-plex-sans"><b>IBM Plex Sans</b> Regular. Copyright 2018 IBM Corp. All rights reserved.</li>
+    
+  </ul>
+  <details>
+    <summary>SIL Open Font License, Version 1.1</summary>
+    <pre data-testid="font-licences-text">Copyright 2018 IBM Corp. All rights reserved.
+
+IBM Plex Sans, Version 3.005 (http://www.boldmonday.com).
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&#34;Font Software&#34; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&#34;Reserved Font Name&#34; refers to any names specified as such after the
+copyright statement(s).
+
+&#34;Original Version&#34; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&#34;Modified Version&#34; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&#34;Author&#34; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+</pre>
+  </details>
+</section>
+
+<section data-testid="font-licences-licence">
+  <h2 class="eyebrow">Inter</h2>
+  <ul>
+    
+    <li data-testid="font-licences-face" data-resource-id="inter"><b>Inter</b> Regular. Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)</li>
+    
+  </ul>
+  <details>
+    <summary>SIL Open Font License, Version 1.1</summary>
+    <pre data-testid="font-licences-text">Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)
+
+Inter Regular, Version 4.001;git-66647c0bb (https://github.com/rsms/inter).
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&#34;Font Software&#34; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&#34;Reserved Font Name&#34; refers to any names specified as such after the
+copyright statement(s).
+
+&#34;Original Version&#34; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&#34;Modified Version&#34; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&#34;Author&#34; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+</pre>
+  </details>
+</section>
+
+<section data-testid="font-licences-licence">
+  <h2 class="eyebrow">JetBrains Mono</h2>
+  <ul>
+    
+    <li data-testid="font-licences-face" data-resource-id="jetbrains-mono"><b>JetBrains Mono</b> Regular. Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)</li>
+    
+    <li data-testid="font-licences-face" data-resource-id="jetbrains-mono-italic"><b>JetBrains Mono</b> Italic. Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)</li>
+    
+  </ul>
+  <details>
+    <summary>SIL Open Font License, Version 1.1</summary>
+    <pre data-testid="font-licences-text">Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+
+JetBrains Mono Regular, Version 2.211 (https://github.com/JetBrains/JetBrainsMono).
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&#34;Font Software&#34; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&#34;Reserved Font Name&#34; refers to any names specified as such after the
+copyright statement(s).
+
+&#34;Original Version&#34; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&#34;Modified Version&#34; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&#34;Author&#34; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+</pre>
+  </details>
+</section>
+
+<section data-testid="font-licences-licence">
+  <h2 class="eyebrow">Noto Sans</h2>
+  <ul>
+    
+    <li data-testid="font-licences-face" data-resource-id="noto-sans"><b>Noto Sans</b> Regular. Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic)</li>
+    
+    <li data-testid="font-licences-face" data-resource-id="noto-sans-italic"><b>Noto Sans</b> Italic. Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic)</li>
+    
+  </ul>
+  <details>
+    <summary>SIL Open Font License, Version 1.1</summary>
+    <pre data-testid="font-licences-text">Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic)
+
+Noto Sans Regular, Version 2.015 (http://www.google.com/get/noto/).
+Noto Sans Italic, Version 2.015 (http://www.google.com/get/noto/).
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&#34;Font Software&#34; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&#34;Reserved Font Name&#34; refers to any names specified as such after the
+copyright statement(s).
+
+&#34;Original Version&#34; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&#34;Modified Version&#34; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&#34;Author&#34; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+</pre>
+  </details>
+</section>
+
+<section data-testid="font-licences-licence">
+  <h2 class="eyebrow">Noto Sans Math</h2>
+  <ul>
+    
+    <li data-testid="font-licences-face" data-resource-id="noto-sans-math"><b>Noto Sans Math</b> Regular. Copyright 2022 Google LLC. All Rights Reserved.</li>
+    
+  </ul>
+  <details>
+    <summary>SIL Open Font License, Version 1.1</summary>
+    <pre data-testid="font-licences-text">Copyright 2022 Google LLC. All Rights Reserved.
+
+Noto Sans Math Regular, Version 3.000; ttfautohint (v1.8.4.7-5d5b) (http://www.google.com/get/noto/).
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&#34;Font Software&#34; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&#34;Reserved Font Name&#34; refers to any names specified as such after the
+copyright statement(s).
+
+&#34;Original Version&#34; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&#34;Modified Version&#34; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&#34;Author&#34; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+</pre>
+  </details>
+</section>
+
+<section data-testid="font-licences-licence">
+  <h2 class="eyebrow">Noto Sans Symbols, Noto Sans Symbols 2</h2>
+  <ul>
+    
+    <li data-testid="font-licences-face" data-resource-id="noto-sans-symbols"><b>Noto Sans Symbols</b> Regular. Copyright 2022 The Noto Project Authors (https://github.com/notofonts/symbols)</li>
+    
+    <li data-testid="font-licences-face" data-resource-id="noto-sans-symbols-2"><b>Noto Sans Symbols 2</b> Regular. Copyright 2022 The Noto Project Authors (https://github.com/notofonts/symbols)</li>
+    
+  </ul>
+  <details>
+    <summary>SIL Open Font License, Version 1.1</summary>
+    <pre data-testid="font-licences-text">Copyright 2022 The Noto Project Authors (https://github.com/notofonts/symbols)
+
+Noto Sans Symbols Regular, Version 2.003 (http://www.google.com/get/noto/).
+Noto Sans Symbols 2 Regular, Version 2.008; ttfautohint (v1.8.4.7-5d5b) (http://www.google.com/get/noto/).
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&#34;Font Software&#34; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&#34;Reserved Font Name&#34; refers to any names specified as such after the
+copyright statement(s).
+
+&#34;Original Version&#34; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&#34;Modified Version&#34; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&#34;Author&#34; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+</pre>
+  </details>
+</section>
+
+<section data-testid="font-licences-licence">
+  <h2 class="eyebrow">Open Gorton</h2>
+  <ul>
+    
+    <li data-testid="font-licences-face" data-resource-id="open-gorton"><b>Open Gorton</b> Regular</li>
+    
+    <li data-testid="font-licences-face" data-resource-id="open-gorton-bold"><b>Open Gorton</b> Bold</li>
+    
+  </ul>
+  <details>
+    <summary>MIT License</summary>
+    <pre data-testid="font-licences-text">MIT License
+
+Copyright (c) 2020 dakotafelder
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &#34;Software&#34;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</pre>
+  </details>
+</section>
+
+<section data-testid="font-licences-licence">
+  <h2 class="eyebrow">Roboto</h2>
+  <ul>
+    
+    <li data-testid="font-licences-face" data-resource-id="roboto"><b>Roboto</b> Regular. Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)</li>
+    
+  </ul>
+  <details>
+    <summary>SIL Open Font License, Version 1.1</summary>
+    <pre data-testid="font-licences-text">Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)
+
+Roboto Regular, Version 3.015; 2026 (Google.com).
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&#34;Font Software&#34; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&#34;Reserved Font Name&#34; refers to any names specified as such after the
+copyright statement(s).
+
+&#34;Original Version&#34; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&#34;Modified Version&#34; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&#34;Author&#34; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+</pre>
+  </details>
+</section>
+
+<section data-testid="font-licences-licence">
+  <h2 class="eyebrow">Roboto Mono</h2>
+  <ul>
+    
+    <li data-testid="font-licences-face" data-resource-id="roboto-mono"><b>Roboto Mono</b> Regular. Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)</li>
+    
+  </ul>
+  <details>
+    <summary>SIL Open Font License, Version 1.1</summary>
+    <pre data-testid="font-licences-text">Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)
+
+Roboto Mono Regular, Version 3.001 (Google.com).
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&#34;Font Software&#34; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&#34;Reserved Font Name&#34; refers to any names specified as such after the
+copyright statement(s).
+
+&#34;Original Version&#34; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&#34;Modified Version&#34; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&#34;Author&#34; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+</pre>
+  </details>
+</section>
+
+<section data-testid="font-licences-licence">
+  <h2 class="eyebrow">Source Sans 3</h2>
+  <ul>
+    
+    <li data-testid="font-licences-face" data-resource-id="source-sans-3"><b>Source Sans 3</b> ExtraLight. © 2023 Adobe (http://www.adobe.com/), with Reserved Font Name ‘Source’</li>
+    
+  </ul>
+  <details>
+    <summary>SIL Open Font License, Version 1.1</summary>
+    <pre data-testid="font-licences-text">© 2023 Adobe (http://www.adobe.com/), with Reserved Font Name ‘Source’
+
+Source Sans 3, Version 3.052;hotconv 1.1.0;makeotfexe 2.6.0 (http://www.adobe.com/type).
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&#34;Font Software&#34; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&#34;Reserved Font Name&#34; refers to any names specified as such after the
+copyright statement(s).
+
+&#34;Original Version&#34; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&#34;Modified Version&#34; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&#34;Author&#34; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+</pre>
+  </details>
+</section>
+
+</div>
+
+</article>
+
+</main>
+
+<footer class="site-footer" data-testid="site-footer">
+  <div class="site-footer-wrap">
+    <div class="site-footer-small-print">
+      <p class="site-footer-identity" data-testid="site-footer-identity">Operated by Sixty North AS, Norway <span class="nowrap">(org. no. 921 587 538)</span>.</p>
+      
+<p class="site-footer-legal" data-testid="site-footer-legal"><a href="/legal/terms-of-sale" data-testid="site-footer-terms">Terms of sale</a> · <a href="/legal/refund-policy" data-testid="site-footer-refunds">Refunds</a> · <a href="/legal/privacy" data-testid="site-footer-privacy">Privacy</a></p>
+
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Progressive-enhancement signal for the live-polling hint. Mark the body script-enabled at once,
+  // and htmx-ready once htmx boots (htmx fires htmx:load on init and after every swap). The CSS uses
+  // these to show the "reload to see progress" hint only when JS is present but polling cannot run
+  // (e.g. htmx failed to load), and to hide it the moment htmx is live.
+  document.body.classList.add('js-on');
+  document.addEventListener('htmx:load', function () { document.body.classList.add('htmx-ready'); });
+</script>
+<script>
+  // A native <details> closes on its own toggle or by choosing an item, but not on an outside
+  // click -- so close any open user-nav or design-card menu when the click (or Escape) lands elsewhere.
+  document.addEventListener('click', function (event) {
+    document.querySelectorAll('details.user-nav[open], details.design-card-menu[open]').forEach(function (menu) {
+      if (!menu.contains(event.target)) menu.removeAttribute('open');
+    });
+  });
+  // Whole-card clickable (redlines, "Starter cards"): a plain click on a card's surface does what its one action
+  // does -- a link signed out, the clone form's button signed in -- by clicking that action, marked data-card-primary.
+  // Anything else is left alone: a click already handled, a non-primary or modified click (opening a new tab stays
+  // with the action itself), a click on a real control, and a click that ends a text selection.
+  document.addEventListener("click", function (e) {
+    var card = e.target.closest && e.target.closest(".card");
+    var primary = card && card.querySelector("[data-card-primary]");
+    if (!primary) return;
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (e.target.closest("a, button, input, select, textarea, summary, label")) return; // real controls act for themselves
+    if (String(getSelection()).length) return; // let people select text
+    primary.click(); // anchor or form submit alike
+  });
+  // A link that starts something slow -- the sign-in avatar, whose page is the identity provider's --
+  // says so the moment it is clicked, before the navigation commits. Only a plain click: a modified one
+  // opens elsewhere and leaves this page as it was. Coming Back to the page clears it.
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest && event.target.closest('a[data-busy-on-click]');
+    if (!link || event.defaultPrevented || event.button !== 0 ||
+        event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    link.setAttribute('aria-busy', 'true');
+  });
+  // A link to a folded section -- "see why" on a revision page lands on a folded advisory -- unfolds it and
+  // brings it into view, so the reader sees what the link promised rather than a closed summary (#55).
+  // Arrival by URL takes load and hashchange; a click on an in-page link takes its own handler, because
+  // clicking a link whose hash is already in the URL fires no hashchange -- and the reader may have closed
+  // the fold since. Returns whether the target lay in a fold.
+  function revealFold(id) {
+    var target = id && document.getElementById(id), folded = false;
+    for (var node = target; node; node = node.parentElement) {
+      if (node.tagName === 'DETAILS') { node.open = true; folded = true; }
+    }
+    if (folded) target.scrollIntoView({ block: 'start' });
+    return folded;
+  }
+  function revealTargetedFold() { revealFold(decodeURIComponent(location.hash.slice(1))); }
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest && event.target.closest('a[href^="#"]');
+    if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey) return;
+    var id = decodeURIComponent(link.getAttribute('href').slice(1));
+    if (!revealFold(id)) return;
+    // Revealed and scrolled here; record the jump without the browser scrolling a second time.
+    event.preventDefault();
+    if (location.hash.slice(1) !== link.getAttribute('href').slice(1)) history.pushState(null, '', '#' + id);
+  });
+  window.addEventListener('hashchange', revealTargetedFold);
+  revealTargetedFold();
+  window.addEventListener('pageshow', function () {
+    document.querySelectorAll('a[data-busy-on-click][aria-busy]').forEach(function (link) {
+      link.removeAttribute('aria-busy');
+    });
+  });
+  // The colour-theme control: each press moves Light -> Dark -> Follow system. Light or Dark sets data-theme on
+  // <html> and stores the choice; Follow system removes both, and the page then tracks the operating system's
+  // setting live (the token sheet follows prefers-color-scheme). The button's icon, name and tooltip show the
+  // current setting and the next.
+  (function () {
+    var root = document.documentElement, KEY = 'keyfab-theme';
+    var ORDER = ['light', 'dark', 'system'], WORDS = { light: 'light', dark: 'dark', system: 'follow system' };
+    var button = document.querySelector('[data-theme-cycle]');
+    if (!button) return;
+    function apply(v) {
+      if (v === 'light' || v === 'dark') root.setAttribute('data-theme', v); else root.removeAttribute('data-theme');
+    }
+    function show(v) {
+      var next = ORDER[(ORDER.indexOf(v) + 1) % ORDER.length];
+      var label = 'Theme: ' + WORDS[v] + ' \u2014 switch to ' + WORDS[next];
+      button.setAttribute('data-current', v);
+      button.setAttribute('aria-label', label);
+      button.title = label;
+      button.querySelectorAll('[data-icon]').forEach(function (icon) { icon.hidden = icon.getAttribute('data-icon') !== v; });
+    }
+    var current = 'system';
+    try { var saved = localStorage.getItem(KEY); if (saved === 'light' || saved === 'dark') current = saved; } catch (e) {}
+    apply(current);
+    show(current);
+    button.hidden = false;
+    button.addEventListener('click', function () {
+      current = ORDER[(ORDER.indexOf(current) + 1) % ORDER.length];
+      apply(current);
+      show(current);
+      try { if (current === 'system') localStorage.removeItem(KEY); else localStorage.setItem(KEY, current); } catch (e) {}
+    });
+  })();
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      document.querySelectorAll('details.user-nav[open], details.design-card-menu[open]').forEach(function (menu) {
+        menu.removeAttribute('open');
+      });
+    }
+  });
+</script>
+</body>
+</html>

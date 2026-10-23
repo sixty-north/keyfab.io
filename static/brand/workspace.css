@@ -1,0 +1,512 @@
+/* The workspace's page components (docs/brand-implementation.md S3): the designs hub, the design and revision
+   pages, orders and checkout, on the token sheet. Shared by every site page; the landing adds its own. */
+body { line-height: 1.5; }
+
+/* The page head (redlines, "Workspace pages (S3)", Q1): one title size for the hub, design and revision
+   pages -- the workspace is the instrument, not the marketing -- with a breadcrumb trail above it and a
+   sub-line beneath. Content starts 40px below the bar (24px on a narrow screen); 32px on to the first
+   section. */
+.page-head { margin: calc(var(--space-8) - var(--space-7)) 0 var(--space-7); }
+.page-head h1 { margin: 0; font: var(--type-h3); letter-spacing: var(--type-h3-tracking); color: var(--ink); overflow-wrap: anywhere; }
+.page-title-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4); }
+.page-sub { margin: 6px 0 0; font: var(--type-body-s); color: var(--ink-2); }
+.crumbs { display: flex; flex-wrap: wrap; gap: 0 10px; margin: 0 0 var(--space-3); font: var(--type-ui); color: var(--ink-2); }
+.crumbs a { color: var(--ink-2); text-decoration: none; }
+.crumbs a:hover { color: var(--ink); text-decoration: underline; }
+.crumbs [aria-current] { color: var(--ink); font-weight: 600; overflow-wrap: anywhere; }
+/* A section within a page: the landing's eyebrow, unnumbered. */
+.site-main h2.eyebrow { margin: var(--space-8) 0 var(--space-4); }
+@media (max-width: 720px) {
+  .page-head { margin-top: calc(var(--space-6) - var(--space-7)); }
+}
+
+/* Running text keeps a reading measure; tables and rules stay full width. A link inside running text is an
+   action, so --signal; navigational and object links (crumbs, object names in table cells, the footer) keep
+   their ink. The landing sets its own. */
+.site-main :is(p, li, .notice, .error):not(.landing *) { max-width: 40em; }
+.site-main :is(p, li, td[data-testid="purchase-state"]) a:not(.button):not(.landing *):not(.revision-row a) { color: var(--signal); }
+
+/* Buttons (Q4): a neutral ghost at --control-h is the workspace's ordinary action; the page's one forward
+   action is primary (--signal). Destructive entry points are ghost-danger; the FILLED danger button exists
+   only as the typed-name page's final confirm, and until the name matches it is drawn as a neutral ghost,
+   not a faded one. --signal never marks a destructive action. */
+.site-main .button, .site-main button {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); box-sizing: border-box;
+  min-height: var(--control-h); padding: 0 14px; margin: 0;
+  font: var(--type-button-s); color: var(--ink); text-decoration: none; cursor: pointer;
+  background: transparent; border: var(--hairline) solid var(--line); border-radius: var(--radius);
+}
+.site-main .button:hover, .site-main button:hover { border-color: var(--ink); }
+.site-main .button:focus-visible, .site-main button:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+.site-main .button-primary, .site-main button.button-primary {
+  background: var(--signal); color: var(--on-signal); border-color: var(--signal);
+}
+.site-main .button-primary:hover, .site-main button.button-primary:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.site-main .button-danger-ghost { color: var(--danger); border-color: var(--danger); }
+.site-main .button-danger-ghost:hover { background: var(--danger-surface); border-color: var(--danger); }
+.site-main button.danger { background: var(--danger); color: var(--on-danger); border-color: var(--danger); }
+.site-main button.danger:disabled { background: transparent; color: var(--ink-2); border-color: var(--line); cursor: not-allowed; }
+.button-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin: var(--space-4) 0; }
+.button-row form { margin: 0; }
+
+/* The designs hub: the card anatomy (cards.css) with the new-design card first. A design card's stage
+   box holds the design as it stands; its meta row its facts; its body the title row, with the card's
+   menu right-aligned on it -- never over the stage box (Q7). The menu sits beside the card's link, laid
+   over the link's title row by the grid, so the whole card stays one link. */
+.cards.design-grid { margin: 0; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); }
+.card.design-card { display: grid; grid-template: "card" 1fr / 1fr; }
+.card.design-card > .design-card-link { grid-area: card; }
+.design-card-link:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+.card.design-card .design-card-title-row {
+  flex: 0 0 auto; flex-direction: row; align-items: center; min-height: var(--control-h);
+  padding: var(--space-3) calc(var(--control-h) + var(--space-3) + 10px) var(--space-3) var(--space-4);
+}
+.card.design-card .design-card-title-row h3 { flex: 1; overflow-wrap: anywhere; }
+.card.design-card.design-card-new .design-card-title-row {
+  padding-right: var(--space-4); flex-direction: column; align-items: flex-start; gap: var(--space-1);
+}
+.design-card-sub { margin: 0; font: var(--type-body-s); color: var(--ink-2); }
+/* The scratch card's stage grows to fill a row its taller neighbours set, so its width must not follow its height:
+   WebKit resolves a plain 2 / 1 against the stretched height and widens the box out of its card (issue 123). Pinning
+   the width keeps the ratio from ever widening it; "auto 2 / 1" keeps the ratio on the content box, as in
+   cards.css, so the unstretched stage is the same 2:1 stage. */
+.card.design-card-new .stagebox { flex: 1; box-sizing: border-box; width: 100%; aspect-ratio: auto 2 / 1; }
+/* A card's depiction box: one proportion for every card, the depiction letterboxed within, so the
+   swap from placeholder to depiction moves nothing and the grid's rows stay even. */
+figure.design-card-depiction { margin: 0; aspect-ratio: 2 / 1; position: relative; }
+figure.design-card-depiction > * { position: absolute; inset: 0; }
+figure.design-card-depiction img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.design-card-placeholder { display: flex; align-items: center; justify-content: center; text-align: center;
+                           background: var(--paper-2); border-radius: var(--radius); }
+.design-card-placeholder .spinner { animation: spin 1s linear infinite, appear .2s .4s both; }
+@keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .design-card-placeholder .spinner { animation: spin 4s linear infinite, appear .2s .4s both; }
+}
+/* The card's menu (Q7): a --control-h square, three dots, opening the user menu's panel. */
+.design-card-menu { grid-area: card; align-self: end; justify-self: end; position: relative; margin: 0 var(--space-3) var(--space-3) 0; }
+.design-card-menu > summary {
+  list-style: none; display: grid; place-content: center; box-sizing: border-box;
+  width: var(--control-h); height: var(--control-h); cursor: pointer; color: var(--ink);
+  background: var(--panel); border: var(--hairline) solid var(--line); border-radius: var(--radius);
+}
+.design-card-menu > summary::-webkit-details-marker { display: none; }
+.design-card-menu > summary:hover { background: var(--paper-2); }
+.design-card-menu > summary:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+.design-card-menu-items {
+  position: absolute; right: 0; top: calc(100% + var(--space-1)); z-index: 10; min-width: 160px;
+  display: grid; padding: var(--space-1);
+  background: var(--panel); border: var(--hairline) solid var(--line); border-radius: var(--radius);
+}
+.design-card-menu-items form { margin: 0; }
+.site-main .design-card-menu-items button, .design-card-menu-items a {
+  display: block; box-sizing: border-box; width: 100%; min-height: 0; padding: 9px 10px; margin: 0;
+  text-align: left; border: 0; border-radius: 0; background: none;
+  font: var(--type-ui); color: var(--ink); text-decoration: none; cursor: pointer;
+}
+.site-main .design-card-menu-items button:hover, .design-card-menu-items a:hover { background: var(--paper-2); }
+.design-card-menu-items .menu-danger { color: var(--danger); }
+/* Archived designs, folded away at the bottom of the hub: smaller cards, no depiction. */
+section.archived { margin-top: var(--space-8); }
+.cards.design-grid-archived { margin-top: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); gap: var(--space-4); }
+.design-card-archived h3 { font: var(--type-title-s); letter-spacing: var(--type-title-tracking); }
+
+/* Folds (Q3): the summary in mono caps behind a 10px chevron that turns when open, with a count; at least
+   --control-h tall, over a hairline. A fold whose summary is a sentence keeps it in sentence case. */
+details.fold > summary, details.purchase-fold > summary, .advisories details.advisory > summary {
+  list-style: none; display: flex; align-items: center; gap: var(--space-2); min-height: var(--control-h);
+  cursor: pointer; color: var(--ink-2); border-bottom: var(--hairline) solid var(--line);
+}
+details.fold > summary { font: var(--type-mono-label); letter-spacing: var(--type-mono-label-tracking); text-transform: uppercase; }
+details.purchase-fold > summary, .advisories details.advisory > summary { font: var(--type-body-s); }
+details.fold > summary::-webkit-details-marker, details.purchase-fold > summary::-webkit-details-marker,
+.advisories details.advisory > summary::-webkit-details-marker { display: none; }
+details.fold > summary:hover, details.purchase-fold > summary:hover, .advisories details.advisory > summary:hover { color: var(--ink); }
+details.fold > summary:focus-visible, details.purchase-fold > summary:focus-visible,
+.advisories details.advisory > summary:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+.fold-caret { flex: none; transition: transform .15s; }
+.warn-mark { flex: none; color: var(--danger); }
+/* The caret and the mark sit 8px apart; the text 6px after the mark (design's ruling). */
+.advisories details.advisory > summary .warn-mark { margin-right: calc(6px - var(--space-2)); }
+details[open] > summary .fold-caret { transform: rotate(90deg); }
+.fold-count { font: var(--type-mono-annotation); letter-spacing: 0; text-transform: none; color: var(--ink-2); }
+@media (prefers-reduced-motion: reduce) { .fold-caret { transition: none; } }
+
+/* Rename, beside a design's title (Q3): an action, not a fold -- a neutral ghost button revealing the
+   inline form (a no-JS <details> beneath the look). */
+details.rename-design > summary { list-style: none; }
+details.rename-design > summary::-webkit-details-marker { display: none; }
+details.rename-design[open] > summary { border-color: var(--ink); }
+form.rename-design { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); margin-top: var(--space-4); }
+form.rename-design label { margin: 0; font: var(--type-ui); color: var(--ink-2); }
+form.rename-design input[type="text"] { flex: 1 1 14rem; max-width: 28rem; }
+form.rename-design .error { flex-basis: 100%; margin: 0; }
+.page-head details.rename-design { flex-basis: 100%; }
+.page-head details.rename-design:not([open]) { flex-basis: auto; }
+
+/* The development sign-in page: one narrow column on the sheet -- its width a measure, never wider than the
+   content column, so a phone never scrolls sideways. */
+.auth-panel { box-sizing: border-box; width: 100%; max-width: 24rem; }
+form.auth-form { display: grid; gap: var(--space-2); margin: 0 0 var(--space-4); }
+/* The sign-in page is one focused task on an otherwise empty sheet, so its field reads large: the label at
+   body size, the address at 17px mono in a field as tall as the button under it (16px or more also keeps iOS
+   from zooming the page on focus). */
+form.auth-form label { margin: 0; font: var(--type-body); color: var(--ink-2); }
+form.auth-form input[type="email"] { width: 100%; height: var(--button-h); padding: 0 var(--space-3); font: 400 17px/1 var(--mono); }
+.site-main form.auth-form button { margin-top: var(--space-2); width: 100%; min-height: var(--button-h); font: var(--type-button); }
+.auth-switch { margin: 0 0 var(--space-6); font: var(--type-body-s); color: var(--ink-2); }
+
+/* The legal pages (issue 179): a text's sections under the eyebrow, and a font's licence
+   text folded beneath its faces, its lines wrapping at the prose measure rather than scrolling sideways. */
+.legal-text ul, .legal-text ol { margin: 0 0 var(--space-4); padding-left: var(--space-5); }
+.legal-text li { margin: 0 0 var(--space-2); }
+.legal-text p { margin: 0 0 var(--space-4); }
+.legal-text summary { cursor: pointer; }
+.legal-text pre { max-width: 40em; white-space: pre-wrap; overflow-wrap: anywhere; font: var(--type-mono-list); color: var(--ink-2); }
+
+/* The delete confirmation: the typed name, then the safe action and the destructive one, in that order. */
+form.delete-design label { font: var(--type-ui); color: var(--ink-2); }
+form.delete-design input[type="text"] { width: 100%; max-width: 24rem; }
+
+/* State tags (the designer's .chip): mono 12px in a hairline box. */
+.chip, .badge {
+  display: inline-flex; align-items: center; padding: 6px 8px;
+  font: var(--type-mono-label); letter-spacing: 0; color: var(--ink);
+  border: var(--hairline) solid var(--line); border-radius: var(--radius); background: var(--panel);
+}
+.archived-marker { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin: 0 0 var(--space-6); }
+
+/* The design page: its facts in the card's meta cells (cards.css), its actions in a row. */
+.meta-cells {
+  display: grid; grid-template-columns: repeat(var(--meta-cells, 3), minmax(0, 1fr));
+  border: var(--hairline) solid var(--line); background: var(--panel);
+  font: var(--type-mono-micro); letter-spacing: var(--type-mono-micro-tracking); text-transform: uppercase; color: var(--ink-2);
+}
+.meta-cells > div { padding: var(--space-2) var(--space-3); border-right: var(--hairline) solid var(--line); }
+.meta-cells > div:last-child { border-right: 0; }
+.meta-cells b { display: block; margin-top: 2px; font: var(--type-mono-label); letter-spacing: 0; text-transform: none; color: var(--ink); }
+.design-facts { max-width: 10rem; margin: var(--space-4) 0 0; }
+.revision-group-label {
+  margin: 0; font: var(--type-mono-annotation); letter-spacing: var(--type-mono-annotation-tracking);
+  text-transform: uppercase; color: var(--ink-2);
+}
+section.latest-revision { margin-top: var(--space-6); }
+details.earlier-revisions { margin-top: var(--space-4); }
+.revision-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-3); margin: 0; padding: var(--space-3) 0;
+                border-bottom: var(--hairline) solid var(--line); font: var(--type-body-s); }
+.revision-row a { font-weight: 600; }
+.revision-row time { font: var(--type-mono-list); color: var(--ink-2); }
+form.capture { margin: 0; }
+form.inline { display: inline; }
+label { display: block; margin-bottom: var(--space-2); }
+
+/* Notices (Q6): an error is a --danger-surface panel with a drawn 3px --danger bar, its headline in --danger;
+   information is a --panel panel with an --ink-2 bar. --signal is for actions, not status. */
+.error, .notice {
+  margin: 0 0 var(--space-4); padding: 10px 14px 10px 17px; font: var(--type-body-s); color: var(--ink);
+  background: linear-gradient(var(--ink-2), var(--ink-2)) left / 3px 100% no-repeat, var(--panel);
+}
+.error { background: linear-gradient(var(--danger), var(--danger)) left / 3px 100% no-repeat, var(--danger-surface); }
+.error > b:first-child, .error > strong:first-child { color: var(--danger); font-weight: 600; }
+.error p { margin: 0 0 var(--space-2); }
+.muted { color: var(--ink-2); font-weight: 400; }
+.muted code { font-size: .85em; }
+
+/* Fields: the designer's input treatment (brand/schematic/designer.html `.field .in`) -- a hairline
+   --line box on the --paper ground, mono value text -- for every text input and select on a workspace
+   page. Height is --control-h, the bar's control height (the reference's 32px has no token). */
+main input[type="text"], main input[type="email"], main select {
+  box-sizing: border-box; height: var(--control-h); padding: 0 var(--space-2);
+  border: var(--hairline) solid var(--line); border-radius: var(--radius);
+  background: var(--paper); color: var(--ink);
+  font: var(--type-mono-nav);
+}
+main select { padding-inline-end: var(--space-1); }
+main input[type="text"]:focus-visible, main input[type="email"]:focus-visible, main select:focus-visible {
+  outline: var(--focus-ring); outline-offset: 1px;
+}
+
+/* The purchase table on the revision page: the file schedule's anatomy (redlines, "What you buy") -- a table
+   framed at --rule (drawn, not bordered), its header on --paper-2 in mono caps, cells divided by hairlines,
+   prices as mono figures. A row per output kind, grouped, with its state, a tick when purchasable, and its
+   price and amount right-aligned; the totals in the footer, the total under a drawn rule. */
+form.purchase-table { margin: var(--space-7) 0; }
+form.purchase-table table {
+  width: 100%; border-collapse: separate; border-spacing: 0; padding: var(--rule);
+  background:
+    linear-gradient(var(--ink), var(--ink)) top / 100% var(--rule) no-repeat,
+    linear-gradient(var(--ink), var(--ink)) bottom / 100% var(--rule) no-repeat,
+    linear-gradient(var(--ink), var(--ink)) left / var(--rule) 100% no-repeat,
+    linear-gradient(var(--ink), var(--ink)) right / var(--rule) 100% no-repeat,
+    var(--panel);
+}
+form.purchase-table th, form.purchase-table td {
+  padding: var(--space-3) var(--space-4); text-align: left; vertical-align: baseline;
+  border-bottom: var(--hairline) solid var(--line);
+}
+form.purchase-table thead th {
+  background: var(--paper-2); padding-top: 10px; padding-bottom: 10px;
+  font: var(--type-mono-annotation); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2);
+}
+form.purchase-table tbody th.purchase-group-label {
+  padding-top: var(--space-4); padding-bottom: var(--space-2);
+  font: var(--type-mono-label); letter-spacing: var(--type-mono-label-tracking); text-transform: uppercase;
+  color: var(--ink-2);
+}
+form.purchase-table tbody th[scope="row"] { font: var(--type-body-s); font-weight: 600; color: var(--ink); }
+form.purchase-table td { font: var(--type-body-s); color: var(--ink-2); }
+form.purchase-table .purchase-buy { text-align: center; white-space: nowrap; }
+form.purchase-table .purchase-price {
+  text-align: right; white-space: nowrap; font: var(--type-mono-figure); color: var(--ink);
+}
+/* Every header cell one treatment: Price and Amount carry the header's mono caps, not the figures'. */
+form.purchase-table thead th.purchase-price {
+  text-align: right; font: var(--type-mono-annotation); letter-spacing: .1em; color: var(--ink-2);
+}
+form.purchase-table thead th.purchase-buy { text-align: center; }
+/* The tick (Q2): drawn on a real checkbox -- WebKit's native box falls below 3:1 on --panel and ignores its
+   size. 18px, an --ink-2 hairline on --panel; checked, --signal with an --on-signal tick; an included item
+   checked and disabled, in the muted treatment. The row's label is a hit target too. */
+form.purchase-table input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none; margin: 0; vertical-align: middle;
+  display: inline-grid; place-content: center; width: 18px; height: 18px; cursor: pointer;
+  background: var(--panel); border: var(--hairline) solid var(--ink-2); border-radius: var(--radius);
+}
+form.purchase-table input[type="checkbox"]:checked { background: var(--signal); border-color: var(--signal); }
+form.purchase-table input[type="checkbox"]:checked::after {
+  content: ""; width: 10px; height: 6px; border: solid var(--on-signal); border-width: 0 0 2px 2px;
+  transform: translateY(-1px) rotate(-45deg);
+}
+form.purchase-table input[type="checkbox"]:disabled { background: var(--paper-2); border-color: var(--line); cursor: not-allowed; }
+form.purchase-table input[type="checkbox"]:disabled:checked::after { border-color: var(--ink-2); }
+form.purchase-table input[type="checkbox"]:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+form.purchase-table th label { display: inline; margin: 0; cursor: pointer; }
+form.purchase-table tfoot th, form.purchase-table tfoot td { color: var(--ink-2); font: var(--type-body-s); }
+form.purchase-table tfoot td.purchase-price { font: var(--type-mono-figure); color: var(--ink); }
+form.purchase-table tfoot tr:last-child th, form.purchase-table tfoot tr:last-child td { border-bottom: 0; }
+form.purchase-table tfoot tr.purchase-total-row th,
+form.purchase-table tfoot tr.purchase-total-row td {
+  font-weight: 600; color: var(--ink);
+  box-shadow: inset 0 var(--rule) 0 var(--ink); /* the total under a rule at --rule: drawn, not bordered */
+}
+form.purchase-table tfoot tr.purchase-total-row td.purchase-price { font: var(--type-mono-price); letter-spacing: var(--type-mono-price-tracking); }
+.purchase-actions { display: flex; justify-content: flex-end; margin-top: var(--space-4); }
+.site-main .purchase-actions button { min-height: var(--button-h); padding: 0 18px; font: var(--type-button); }
+/* Nothing ticked, nothing to check out: Checkout is drawn in the disabled grammar (Q4) -- a neutral ghost.
+   Visual only, so the no-script page still works; the server's refusal of an empty selection is the gate. */
+form.purchase-table:not(:has(input[name="kind"]:checked)) .purchase-actions button {
+  background: transparent; color: var(--ink-2); border-color: var(--line); cursor: not-allowed;
+}
+
+/* The view filters: one line of selects narrowing which vendor's files the sections show. */
+form.view-filters { display: flex; gap: var(--space-3) var(--space-6); align-items: center; flex-wrap: wrap; margin: 0 0 var(--space-4); }
+form.view-filters label { display: inline-flex; gap: var(--space-2); align-items: center; margin: 0; font: var(--type-body-s); color: var(--ink-2); }
+
+/* The downloads table: the title-block construction (redlines, "Title block (hero) -- table construction") --
+   a 1px --ink frame on --panel, cells divided by hairlines, labels in mono annotation, one row per
+   package: supplier, then the package's friendly name as its download link. Refusals and failures fold
+   beneath it, one line each until opened. */
+table.downloads-table {
+  width: 100%; border-collapse: collapse; margin: var(--space-3) 0 var(--space-5);
+  border: var(--hairline) solid var(--ink); background: var(--panel);
+}
+table.downloads-table th, table.downloads-table td {
+  padding: var(--space-2) var(--space-3); text-align: left; border-bottom: var(--hairline) solid var(--line);
+}
+table.downloads-table td + td { border-left: var(--hairline) solid var(--line); }
+table.downloads-table thead th {
+  font: var(--type-mono-annotation); letter-spacing: var(--type-mono-annotation-tracking);
+  text-transform: uppercase; color: var(--ink-2); background: var(--paper-2);
+}
+table.downloads-table th.downloads-group-label {
+  padding-top: var(--space-4); border-bottom: 0;
+  font: var(--type-mono-label); letter-spacing: var(--type-mono-label-tracking); text-transform: uppercase; color: var(--ink-2);
+}
+table.downloads-table tr.downloads-group-purpose td { padding-top: 0; font: var(--type-fine); color: var(--ink-2); }
+table.downloads-table td[data-testid="download-supplier"] { font: var(--type-mono-value); color: var(--ink); white-space: nowrap; }
+.advisories details.advisory[open] > summary { color: var(--ink); }
+.advisories details.advisory > :not(summary) { margin-top: var(--space-3); }
+form.purchase-table details.purchase-fold[open] > summary { margin-bottom: var(--space-4); }
+
+
+/* Order lines (Q5). Checkout and the receipt: the purchase table's construction without its tick column --
+   framed at --rule, drawn. The orders index: the title block's -- a 1px --ink frame, values in mono list.
+   Both total under a drawn --rule. */
+table.order-lines { width: 100%; margin: 0 0 var(--space-5); border-spacing: 0; }
+table.order-lines-schedule {
+  border-collapse: separate; padding: var(--rule);
+  background:
+    linear-gradient(var(--ink), var(--ink)) top / 100% var(--rule) no-repeat,
+    linear-gradient(var(--ink), var(--ink)) bottom / 100% var(--rule) no-repeat,
+    linear-gradient(var(--ink), var(--ink)) left / var(--rule) 100% no-repeat,
+    linear-gradient(var(--ink), var(--ink)) right / var(--rule) 100% no-repeat,
+    var(--panel);
+}
+table.order-lines-title-block { border-collapse: collapse; border: var(--hairline) solid var(--ink); background: var(--panel); }
+table.order-lines th, table.order-lines td {
+  padding: var(--space-3) var(--space-4); text-align: left; vertical-align: baseline;
+  border-bottom: var(--hairline) solid var(--line); font: var(--type-body-s); color: var(--ink-2);
+}
+table.order-lines-title-block th, table.order-lines-title-block td { padding: var(--space-2) var(--space-3); }
+table.order-lines-title-block td { font: var(--type-mono-list); }
+table.order-lines thead th {
+  background: var(--paper-2); padding-top: 10px; padding-bottom: 10px;
+  font: var(--type-mono-annotation); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2);
+}
+table.order-lines tbody th[scope="row"] { font: var(--type-body-s); font-weight: 600; color: var(--ink); }
+table.order-lines .purchase-price { text-align: right; white-space: nowrap; font: var(--type-mono-figure); color: var(--ink); }
+table.order-lines-title-block .purchase-price { font: var(--type-mono-list); }
+table.order-lines thead th.purchase-price { font: var(--type-mono-annotation); letter-spacing: .1em; color: var(--ink-2); }
+table.order-lines tfoot th { font: var(--type-body-s); color: var(--ink-2); }
+table.order-lines tfoot tr:last-child th, table.order-lines tfoot tr:last-child td { border-bottom: 0; }
+table.order-lines tfoot tr.order-total-row th, table.order-lines tfoot tr.order-total-row td {
+  font-weight: 600; color: var(--ink); box-shadow: inset 0 var(--rule) 0 var(--ink);
+}
+table.order-lines-schedule tfoot tr.order-total-row td.purchase-price { font: var(--type-mono-price); letter-spacing: var(--type-mono-price-tracking); }
+table.order-lines-title-block tfoot tr.order-total-row td.purchase-price { font: var(--type-mono-value); }
+table.order-lines .list-amount { color: var(--ink-2); font-weight: 400; }
+table.order-lines .discount { font: var(--type-fine); color: var(--ink-2); white-space: normal; }
+ol.orders { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-8); }
+.order-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); margin: 0 0 var(--space-3); }
+.order-head time { font: var(--type-mono-list); }
+.order-action { margin: 0; }
+/* At 720px and below, as the landing's bom does, a row's cells wrap under its title rather than the table
+   scrolling: the output and its tick on one line, its status beneath, then its price and amount, each
+   named. The header row's names move onto the figures; the totals keep label and figure on one line. */
+@media (max-width: 720px) {
+  form.purchase-table table, form.purchase-table tbody, form.purchase-table tfoot,
+  table.order-lines, table.order-lines tbody, table.order-lines tfoot { display: block; }
+  form.purchase-table thead, table.order-lines thead { display: none; }
+  form.purchase-table tr, table.order-lines tr {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-1) var(--space-3);
+    padding: var(--space-3) var(--space-4); border-bottom: var(--hairline) solid var(--line);
+  }
+  form.purchase-table tr > *, table.order-lines tr > * { padding: 0; border: 0; text-align: left; }
+  form.purchase-table tbody th.purchase-group-label { grid-column: 1 / -1; padding: var(--space-2) 0 0; }
+  form.purchase-table tbody tr:has(> th.purchase-group-label) { border-bottom: 0; padding-bottom: 0; }
+  form.purchase-table tbody td[data-testid="purchase-state"] { grid-column: 1 / -1; grid-row: 2; }
+  form.purchase-table tbody td.purchase-buy { grid-column: 2; grid-row: 1; text-align: right; }
+  form.purchase-table tbody td[data-testid="purchase-price"] { grid-column: 1; grid-row: 3; text-align: left; }
+  form.purchase-table tbody td[data-testid="purchase-amount"] { grid-column: 2; grid-row: 3; text-align: right; }
+  form.purchase-table tbody td[data-testid="purchase-price"]::before { content: "Price "; }
+  form.purchase-table tbody td[data-testid="purchase-amount"]::before { content: "Amount "; }
+  form.purchase-table tbody td.purchase-price::before, table.order-lines tbody td.purchase-price::before {
+    font: var(--type-mono-annotation); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2);
+  }
+  form.purchase-table tfoot tr, table.order-lines tfoot tr { align-items: baseline; }
+  form.purchase-table tfoot td.purchase-price, table.order-lines tfoot td.purchase-price { text-align: right; }
+  form.purchase-table tfoot tr.purchase-total-row, table.order-lines tfoot tr.order-total-row {
+    box-shadow: inset 0 var(--rule) 0 var(--ink); border-bottom: 0;
+  }
+  form.purchase-table tfoot tr.purchase-total-row th, form.purchase-table tfoot tr.purchase-total-row td,
+  table.order-lines tfoot tr.order-total-row th, table.order-lines tfoot tr.order-total-row td { box-shadow: none; }
+  form.purchase-table tfoot tr.purchase-total-row td.purchase-price,
+  table.order-lines-schedule tfoot tr.order-total-row td.purchase-price { font-size: 22px; }
+  table.order-lines tbody td:not(.purchase-price) { grid-column: 1 / -1; grid-row: 2; }
+  table.order-lines tbody td.purchase-price { grid-column: 2; grid-row: 1; text-align: right; }
+  table.order-lines tbody tr:last-child, form.purchase-table tfoot tr:last-child { border-bottom: 0; }
+}
+
+/* The stage box for a page's depiction (the card's stage box at page size): an --ink frame on the drafting
+   grid, the depiction shadowed, never tinted (the stage rule). The depiction keeps its own proportions,
+   no taller than 480px. */
+.stage {
+  margin: 0 0 var(--space-6); padding: 34px 22px 26px; border: var(--hairline) solid var(--ink);
+  background-color: var(--paper-2);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+.stage figure { margin: 0 auto; max-width: 100%; width: min(100%, calc(480px * (var(--hero-ar, 2)))); }
+.stage figure img { filter: var(--board-shadow); }
+.stage .revision-hero-placeholder { background: transparent; border: 0; }
+
+/* The revision hero: one box at the depiction's own proportions (an inline aspect-ratio from its
+   frame), whether it holds the depiction, a pending spinner or a failed notice -- so the swap from
+   placeholder to depiction moves nothing on the page. */
+figure.revision-hero { display: grid; grid-template: 1fr / 1fr; }
+figure.revision-hero img { display: block; width: 100%; height: 100%; }
+.revision-hero-placeholder { display: flex; align-items: center; justify-content: center;
+                             background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--radius);
+                             text-align: center; padding: 0 1rem; }
+/* The design page's hero: the same box, sized by its aspect-ratio alone -- its layers are laid over
+   it, so no picture can stretch it. While a new version's depiction renders, the previous one sits
+   letterboxed within, subdued, under the spinner -- the previous look, being replaced. */
+figure.design-hero { position: relative; margin: 0 0 1rem; }
+figure.design-hero > img, figure.design-hero > div { position: absolute; inset: 0; }
+figure.design-hero img { display: block; width: 100%; height: 100%; object-fit: contain; }
+figure.design-hero img.design-hero-previous { opacity: .35; filter: grayscale(1); }
+figure.design-hero .design-hero-overlay { display: flex; align-items: center; justify-content: center; }
+figure.design-hero .design-hero-overlay .spinner { background: var(--panel);
+                                                   box-shadow: 0 0 0 .6rem var(--panel); }
+.spinner { width: 1.5rem; height: 1.5rem; border: 2px solid var(--line); border-top-color: var(--ink);
+           border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 4s; } }
+
+/* The live-polling hint: shown only when a section is live but self-updating cannot work.
+   Hidden by default (the <noscript> beside it covers a scripting-off browser); revealed when
+   JS is present, then hidden again the moment htmx boots and polling is actually running. So a
+   browser where JS loaded but htmx did not -- the 404-proxy failure that stranded a live section
+   on "waiting for a worker…" -- still tells the user to reload. Order matters: the htmx-ready
+   rule follows the js-on rule so it wins once both classes are set. */
+.js-live-hint { display: none; }
+body.js-on .js-live-hint { display: block; }
+body.htmx-ready .js-live-hint { display: none; }
+
+/* The top-right user navigation menu (a no-JS <details> dropdown), and beside it -- only while an
+   administrator views as a customer -- a slim marker with the way back. */
+.user-nav-area { display: flex; align-items: center; gap: .6rem; }
+.user-nav { position: relative; }
+.user-nav > summary { list-style: none; cursor: pointer; }
+.user-nav > summary::-webkit-details-marker { display: none; }
+.user-nav .avatar { display: block; width: 36px; height: 36px; }
+/* The drawn cap (brand/handoff/avatar.md): styled here rather than inline, so hover can reach the top face. */
+.avatar-base { fill: var(--panel); stroke: var(--ink); stroke-width: 1.5; }
+.avatar-top { fill: var(--panel); stroke: var(--line); stroke-width: 1; }
+.avatar-initial { font: 600 13px var(--mono); fill: var(--ink); }
+/* The signed-out legend: cap height 5.1 on alphabetic baselines 2.4 apart, the block centred on the top face. */
+.avatar-legend { font: 600 7px var(--mono); fill: var(--ink); }
+.user-nav > summary:hover .avatar-top, a.user-nav.sign-in:hover .avatar-top { fill: var(--paper-2); }
+.user-nav > summary:focus-visible, a.user-nav.sign-in:focus-visible { outline: var(--focus-ring); outline-offset: 3px;
+                                                                      border-radius: var(--radius); }
+.user-nav-menu { position: absolute; right: 0; top: calc(100% + .4rem); min-width: 11rem;
+                 background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+                 padding: .3rem; z-index: 10; }
+.user-nav-menu a, .user-nav-menu button { display: block; box-sizing: border-box; width: 100%;
+                 text-align: left; padding: .4rem .6rem; border: 0; background: none;
+                 border-radius: .3rem; text-decoration: none; color: inherit; font: inherit;
+                 cursor: pointer; }
+.user-nav-menu a:hover, .user-nav-menu button:hover { background: var(--paper-2); }
+.user-nav-menu form { margin: 0; }
+.user-nav-email { padding: .4rem .6rem; font-size: .8rem; color: var(--ink-2);
+                  border-bottom: 1px solid var(--line); margin-bottom: .2rem; }
+/* The signed-out avatar while sign-in loads: dimmed and pulsing, with a word to say so. */
+.user-nav.sign-in { display: flex; align-items: center; gap: .4rem; text-decoration: none;
+                    color: var(--ink-2); font-size: .8rem; }
+.user-nav.sign-in .sign-in-busy { display: none; }
+.user-nav.sign-in[aria-busy="true"] { cursor: progress; }
+.user-nav.sign-in[aria-busy="true"] .avatar { opacity: .5; animation: sign-in-pulse 1s ease-in-out infinite; }
+.user-nav.sign-in[aria-busy="true"] .sign-in-busy { display: inline; }
+@keyframes sign-in-pulse { 50% { opacity: .2; } }
+@media (prefers-reduced-motion: reduce) {
+  .user-nav.sign-in[aria-busy="true"] .avatar { animation: none; }
+}
+
+/* The making guide beneath the files: a stage per heading, a vendor's block set a little in. */
+section.making-guide { margin-top: 2rem; }
+section.making-guide .guide-vendor { margin-left: .75rem; }
+section.making-guide h4 { margin: .75rem 0 .25rem; font-size: 1rem; }
+table.guide-parts-list { width: 100%; border-collapse: collapse; margin: .5rem 0 1rem; font-size: .9rem; }
+table.guide-parts-list th, table.guide-parts-list td { padding: .25rem .4rem; text-align: left;
+                                                      border-bottom: 1px solid var(--line); }
+table.guide-parts-list td.guide-parts-quantity { text-align: right; }
+
+/* Printed, the revision page is a sheet for the workbench: the hero, the files and the guide, without
+   the controls around them. */
+@media print {
+  header, form.view-filters, #revision-checkout, .js-live-hint, noscript,
+  nav.crumbs, form.report-failure { display: none !important; }
+  body { max-width: none; margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  section.making-guide .guide-stage { break-inside: avoid; }
+}

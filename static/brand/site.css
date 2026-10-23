@@ -1,0 +1,206 @@
+/* The site's foundations on the brand token sheet (docs/brand-implementation.md, S1): the typefaces,
+   the drafting-grid sheet, the header bar the designer shares, the colour-mode toggle, the footer, and
+   focus. Every value is a token from tokens.css; constants the redlines fix are named where they appear.
+   Page components keep their own rules in base.html until S3 restyles them. */
+
+@font-face {
+  font-family: "Inter";
+  src: url("/static/fonts/inter-var-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/static/fonts/jetbrains-mono-var-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* The sheet. One drafting grid across the site and the designer: minor lines every 1u, major every 5u,
+   at the designer canvas's own origin, so a line on the landing page sits where the canvas line will.
+   It lives on the body and scrolls with the page; it is never re-originated per section or page. */
+html { scroll-behavior: smooth; }
+/* An in-page jump lands below the sticky header bar, not under it. */
+html { scroll-padding-top: calc(var(--bar-h) + var(--space-4)); }
+body {
+  margin: 0;
+  /* A column, the content taking the slack: on a page shorter than the window the footer still closes it. */
+  display: flex; flex-direction: column; min-height: 100vh;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:
+    var(--grid-major-u) var(--grid-major-u), var(--grid-major-u) var(--grid-major-u),
+    var(--grid-u) var(--grid-u), var(--grid-u) var(--grid-u);
+  background-position: var(--grid-origin-x) var(--grid-origin-y);
+  font: var(--type-body);
+  font-optical-sizing: auto;
+  font-feature-settings: "tnum" 1, "cv11" 1;
+}
+a { color: var(--ink); }
+:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+
+/* The skip link: the first thing a keyboard reaches, out of sight until it is focused. */
+.skip-link {
+  position: absolute; left: var(--bar-inset-start); top: var(--space-2); z-index: 10;
+  padding: var(--space-2) var(--space-3); font: var(--type-ui);
+  color: var(--ink); background: var(--panel);
+  border: var(--hairline) solid var(--line); border-radius: var(--radius);
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+
+/* The header bar IS the designer's bar: 56px including its hairline, panel tone, full bleed, the
+   wordmark 12px in at a 20px cap height, controls 14px apart. Right-hand slot order is fixed: primary
+   action, theme toggle, identity -- with an administrator's customer-view chip just before the primary
+   action. */
+.site-bar {
+  position: sticky; top: 0; z-index: 5;
+  box-sizing: border-box; height: var(--bar-h);
+  display: flex; align-items: center; gap: var(--bar-gap);
+  padding: 0 var(--bar-inset-end) 0 var(--bar-inset-start);
+  background: var(--panel);
+  border-bottom: var(--hairline) solid var(--line);
+}
+/* The wordmark never shrinks: the controls give way first. */
+.site-bar-brand { display: block; flex-shrink: 0; color: var(--ink); text-decoration: none; }
+.site-bar-brand .kf-wordmark { display: block; height: var(--wordmark-h); width: auto; } /* 20px cap height */
+.site-bar-spacer { flex: 1; }
+/* In-page destinations, on a page that has them: a separator rule, then mono links. */
+.site-bar-nav {
+  display: flex; align-items: center; gap: var(--space-6); height: 24px;
+  padding-left: var(--bar-gap); border-left: var(--hairline) solid var(--line);
+}
+.site-bar-nav a {
+  color: var(--ink-2); text-decoration: none;
+  font: var(--type-mono-nav); letter-spacing: var(--type-mono-nav-tracking);
+}
+.site-bar-nav a:hover { color: var(--ink); text-decoration: underline; }
+
+/* Buttons the chrome uses. The bar's start action is a ghost (Rob's starter-first ruling): keyfab leads people to
+   a working design, so the bar carries no signal fill; its frame is the theme button's beside it. */
+.site-button {
+  display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;
+  min-height: var(--control-h); padding: 0 14px;
+  font: var(--type-button-s); white-space: nowrap; text-decoration: none; cursor: pointer;
+  border: var(--hairline) solid var(--line); border-radius: var(--radius);
+  background: transparent; color: var(--ink);
+}
+.site-button-ghost:hover { border-color: var(--ink); }
+.site-button-glyph { display: none; font: var(--type-title); line-height: 1; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* The colour-theme control: one 36px button cycling Light, Dark, Follow system, showing the current setting. */
+.theme-cycle {
+  display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;
+  width: var(--control-h); height: var(--control-h); padding: 0;
+  border: var(--hairline) solid var(--line); border-radius: var(--radius);
+  background: var(--panel); color: var(--ink); cursor: pointer;
+}
+.theme-cycle[hidden] { display: none; }
+.theme-cycle:hover { background: var(--paper-2); }
+.theme-cycle:active { background: var(--paper-2); box-shadow: inset 0 0 0 1px var(--ink); }
+.theme-cycle:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+.theme-cycle-icon { display: flex; }
+.theme-cycle-icon[hidden] { display: none; }
+
+/* An administrator viewing as a customer: a mono chip, just before the primary action. */
+.site-bar .customer-view-indicator {
+  display: flex; align-items: center; gap: var(--space-2); margin: 0;
+  padding: var(--space-1) var(--space-1) var(--space-1) var(--space-2);
+  font: var(--type-mono-annotation); letter-spacing: var(--type-mono-annotation-tracking);
+  color: var(--ink); background: var(--panel);
+  border: var(--hairline) solid var(--line); border-radius: var(--radius);
+}
+.site-bar .customer-view-indicator button {
+  font: inherit; letter-spacing: inherit; padding: var(--space-1) var(--space-2); cursor: pointer;
+  color: var(--ink); background: transparent;
+  border: var(--hairline) solid var(--line); border-radius: var(--radius);
+}
+
+/* The drawing-title strip: mono caps, a section number in signal, a hairline filling the row. The landing's
+   section labels, and the workspace pages' (without numbers). */
+.eyebrow {
+  display: flex; align-items: center; gap: var(--bar-gap);
+  font: var(--type-mono-label); letter-spacing: var(--type-mono-label-tracking); text-transform: uppercase;
+  color: var(--ink-2);
+}
+.eyebrow::after { content: ""; flex: 1; height: var(--hairline); background: var(--line); }
+.eyebrow b { color: var(--signal); font-weight: 600; }
+.eyebrow span { white-space: nowrap; }
+
+/* The page's content column on the sheet. */
+/* The content column is the footer's wrap, so the page's content and the footer share a left edge. */
+.site-main { box-sizing: border-box; flex: 1 0 auto; width: 100%; max-width: var(--wrap-max); margin: 0 auto; padding: var(--space-7) var(--wrap-pad) 0; }
+/* Where a page opens with a hero, it sits 64px below the bar (the redlines' endorsed value). */
+.site-hero { padding-top: var(--space-10); }
+
+/* The footer: the identity, the no-tracking stance, and where to go -- under a rule, on the paper. */
+/* The top rule at --rule weight, drawn, not bordered (the redlines' rule-weight recipe): browsers snap
+   border widths, so a 1.5px border collapses to the hairline's 1px; a gradient edge renders closest to
+   1.5px in both engines, and always heavier than the hairline. */
+.site-footer {
+  margin-top: var(--footer-gap);
+  background: linear-gradient(var(--ink), var(--ink)) top / 100% var(--rule) no-repeat, var(--paper);
+}
+.site-footer-wrap {
+  box-sizing: border-box; max-width: var(--wrap-max); margin: 0 auto;
+  padding: var(--footer-pad-top) var(--wrap-pad) var(--footer-pad-bottom);
+  display: grid; gap: var(--space-7);
+}
+/* Row 1, the product: the wordmark and the places to go, prominent. */
+.site-footer-product { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-7); }
+.site-footer-brand { display: block; color: var(--ink); }
+.site-footer .kf-wordmark { display: block; height: var(--wordmark-h); width: auto; }
+.site-footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); }
+.site-footer-links a { font: var(--type-body); font-weight: 600; color: var(--ink); text-decoration: none; }
+.site-footer-links a:hover { text-decoration: underline; }
+/* Row 2, the stance. */
+.site-footer .site-footer-stance {
+  margin: 0 0 var(--space-1);
+  font: var(--type-title-s); letter-spacing: var(--type-title-tracking); color: var(--ink);
+}
+.site-footer-stance-block p:not(.site-footer-stance) { margin: 0; font: var(--type-fine); color: var(--ink-2); }
+/* Row 3, the small print. */
+.site-footer-small-print { padding-top: var(--space-4); border-top: var(--hairline) solid var(--line); }
+.site-footer-small-print { display: grid; gap: var(--space-1); }
+.site-footer-small-print p { margin: 0; font: var(--type-mono-note); color: var(--ink-2); }
+.site-footer-small-print a { color: var(--ink-2); }
+.nowrap { white-space: nowrap; }
+
+
+/* The in-page nav hides at 860px and below: with it the bar needs 838.8px (the redlines' measured budget for
+   "Design from scratch"). */
+@media (max-width: 860px) {
+  .site-bar-nav { display: none; }
+}
+
+/* Narrow: 16px gutters. */
+@media (max-width: 720px) {
+  .site-main { padding-left: var(--space-4); padding-right: var(--space-4); }
+  .site-footer-wrap { padding-left: var(--space-4); padding-right: var(--space-4); }
+  .site-hero { padding-top: var(--space-8); }
+}
+
+/* Narrow phones: "Design from scratch" keeps its place and its name, as a 36px square plus -- at 460px and below,
+   where the full label no longer fits the bar's budget. */
+@media (max-width: 460px) {
+  .site-button-label { display: none; }
+  .site-button-glyph { display: inline; }
+  .site-button-ghost { width: var(--control-h); height: var(--control-h); padding: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
